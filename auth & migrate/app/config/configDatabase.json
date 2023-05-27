@@ -2,21 +2,21 @@
     "development": {
         "username": "root",
         "password": null,
-        "database": "app_travel",
+        "database": "auth_migrate_db",
         "host": "localhost",
         "dialect": "mysql"
     },
     "test": {
         "username": "root",
         "password": null,
-        "database": "app_travel",
+        "database": "auth_migrate_db",
         "host": "localhost",
         "dialect": "mysql"
     },
     "production": {
         "username": "root",
         "password": null,
-        "database": "app_travel",
+        "database": "auth_migrate_db",
         "host": "localhost",
         "dialect": "mysql"
     }

@@ -1,5 +1,5 @@
 {
-    "name": "app-travel",
+    "name": "authentications",
     "version": "1.0.0",
     "description": "belajar authentication",
     "main": "index.js",

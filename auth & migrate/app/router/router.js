@@ -1,6 +1,6 @@
 const verifySignUpController = require('../controllers').verifySignUp;
 const verifySignController = require('../controllers').verifySign;
-const bookingController = require('../controllers').booking;
+const statusController = require('../controllers').status;
 const verifyJwtTokenController = require('../controllers').verifyJwtToken;
 
 module.exports = function (app) {
@@ -11,33 +11,52 @@ module.exports = function (app) {
 
     app.post(
         '/api/auth/signup',
-        [verifySignUpController.checkDuplicateUserNameOrEmail],
+        [
+            verifySignUpController.checkDuplicateUserNameOrEmail,
+            verifySignUpController.checkRolesExisted
+        ],
         verifySignController.signup
     );
 
     app.post('/api/auth/signin', verifySignController.signin);
 
-    // Booking
-    app.get('/api/booking', bookingController.list);
+    //Status
+    app.get('/api/status', statusController.list);
     app.get(
-        '/api/userbooking',
+        '/api/statususer',
         [verifyJwtTokenController.verifyToken],
-        bookingController.listUserBooking
+        statusController.listStatusUser
     );
-    app.get('/api/booking/:id', bookingController.getById);
+    app.get(
+        '/api/status/:id',
+        [
+            verifyJwtTokenController.verifyToken,
+            verifyJwtTokenController.isAdmin
+        ],
+        statusController.getById
+    );
     app.post(
-        '/api/booking',
-        [verifyJwtTokenController.verifyToken],
-        bookingController.booking
+        '/api/status',
+        [
+            verifyJwtTokenController.verifyToken,
+            verifyJwtTokenController.isAdmin
+        ],
+        statusController.add
     );
     app.put(
-        '/api/booking/:id',
-        [verifyJwtTokenController.verifyToken],
-        bookingController.update
+        '/api/status/:id',
+        [
+            verifyJwtTokenController.verifyToken,
+            verifyJwtTokenController.isAdmin
+        ],
+        statusController.update
     );
     app.delete(
-        '/api/booking/:id',
-        [verifyJwtTokenController.verifyToken],
-        bookingController.delete
+        '/api/status/:id',
+        [
+            verifyJwtTokenController.verifyToken,
+            verifyJwtTokenController.isAdmin
+        ],
+        statusController.delete
     );
 };
