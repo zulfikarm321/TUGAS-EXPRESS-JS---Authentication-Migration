@@ -6,8 +6,8 @@ const verifyJwtController = require('../controllers/verifyjwt.controller');
 route.post('/:id', verifyJwtController.verify, paymentController.create);
 
 // READ
-route.get('/', paymentController.get);
-route.get('/:id', paymentController.getById);
+route.get('/', verifyJwtController.verify, paymentController.get);
+route.get('/:id', verifyJwtController.verify, paymentController.getById);
 
 // UPDATE
 route.put('/:id', verifyJwtController.verify, paymentController.update);
